@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "234123775206",
+    "project_id": "fraud-beab6",
+    "storage_bucket": "fraud-beab6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234123775206:android:3503dd14f51e34124c7f27",
+        "android_client_info": {
+          "package_name": "com.pawan.ammaFood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234123775206-hrin1sf61qrq140oi7c232ojci6cjvpp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pawan.ammaFood",
+            "certificate_hash": "85835c264e01aab709857b9e3e91be48b0ea55fb"
+          }
+        },
+        {
+          "client_id": "234123775206-a7f4i0s30att7dqha23e4eqccqa3l70d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwzyDsrtGt8l0Udd5Ypuq2Dx1eD1djUIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234123775206-a7f4i0s30att7dqha23e4eqccqa3l70d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
