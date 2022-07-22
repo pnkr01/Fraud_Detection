@@ -12,8 +12,8 @@ datasource db {
 
 model App {
     id            String   @id @default(cuid())
-    client_id     String   @unique
-    client_secret String
+    client_id     String   @unique @default(uuid())
+    client_secret String   @default(uuid())
     name          String
     user          User     @relation(fields: [userId], references: [id])
     description   String?
