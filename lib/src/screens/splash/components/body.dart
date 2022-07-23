@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quick_order/src/global/constants.dart';
 import 'package:quick_order/src/global/size_configuration.dart';
-
-// This is the best practice
-import '../../sign_in/sign_in_screen.dart';
 import '../components/splash_content.dart';
 import '../../../components/default_button.dart';
 
@@ -70,9 +67,9 @@ class _BodyState extends State<Body> {
                     ),
                     const Spacer(flex: 3),
                     DefaultButton(
-                      text: "Continue",
+                      text: "Skip & LogIn",
                       press: () {
-                        Navigator.pushReplacementNamed(context,'/signIn');
+                        Navigator.pushReplacementNamed(context,'/signInCumLogIn');
                       },
                     ),
                     const Spacer(),

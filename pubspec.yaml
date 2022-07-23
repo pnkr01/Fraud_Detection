@@ -80,7 +80,7 @@ flutter:
   fonts:
     - family: Muli
       fonts:
-        - asset: assets/fonts/muli/Muli-Italic.ttf
+        - asset: assets/fonts/muli/Muli-Bold.ttf
     - family: MuliS
       fonts:
         - asset: assets/fonts/muli/Muli.ttf

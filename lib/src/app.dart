@@ -5,13 +5,11 @@ import 'package:quick_order/src/global/global.dart';
 import 'package:quick_order/src/screens/cart/cart_screen.dart';
 import 'package:quick_order/src/screens/complete_profile/complete_profile_screen.dart';
 import 'package:quick_order/src/screens/details/details_screen.dart';
-import 'package:quick_order/src/screens/forgot_password/forgot_password_screen.dart';
 import 'package:quick_order/src/screens/home/home_screen.dart';
 import 'package:quick_order/src/screens/login_success/login_success_screen.dart';
 import 'package:quick_order/src/screens/otp/otp_screen.dart';
 import 'package:quick_order/src/screens/profile/profile_screen.dart';
-import 'package:quick_order/src/screens/sign_in/sign_in_screen.dart';
-import 'package:quick_order/src/screens/sign_up/sign_up_screen.dart';
+import 'package:quick_order/src/screens/sign_in/sign_in_logi_in.dart';
 import 'package:quick_order/src/screens/splash/splash_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -25,10 +23,8 @@ class MyApp extends StatelessWidget {
       home: const HandleOnboarding(),
       routes: {
         '/splash': (context) => const SplashScreen(),
-        '/signIn': (context) => const SignInScreen(),
-        '/forgotPassword': (context) => ForgotPasswordScreen(),
+        '/signInCumLogIn': (context) => const SignInLogInScreen(),
         '/loginSucessful': (context) => LoginSuccessScreen(),
-        '/signUpScreen': (context) => SignUpScreen(),
         '/completeProfileScreen': (context) => CompleteProfileScreen(),
         '/otpScreen': (context) => const OtpScreen(),
         '/home': (context) => const HomeScreen(),
