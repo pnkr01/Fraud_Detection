@@ -40,3 +40,5 @@ export default Home;
 Home.getLayout = function getLayout(page: React.ReactElement) {
   return <Layout>{page}</Layout>;
 };
+
+Home.auth = true;

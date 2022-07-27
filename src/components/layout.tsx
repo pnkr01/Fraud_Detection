@@ -1,3 +1,4 @@
+import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import React from "react";
 import { Button } from "./button";
@@ -5,6 +6,7 @@ import { Button } from "./button";
 type DefaultLayoutProps = { children: React.ReactNode };
 
 export default function Layout({ children }: DefaultLayoutProps) {
+  const { data } = useSession();
   return (
     <div className="min-h-screen bg-gray-100">
       <Head>
@@ -17,7 +19,11 @@ export default function Layout({ children }: DefaultLayoutProps) {
           <h1 className="text-xl font-bold text-indigo-700 uppercase">
             Fraud Auth App
           </h1>
-          <Button>Sign out</Button>
+          {data?.user ? (
+            <Button onClick={() => signOut()}>Sign out</Button>
+          ) : (
+            <Button onClick={() => signIn("github")}>Sign in</Button>
+          )}
         </div>
       </header>
       <main className="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
