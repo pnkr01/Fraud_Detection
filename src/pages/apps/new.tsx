@@ -8,7 +8,7 @@ import { trpc } from "~/utils/trpc";
 
 export default function NewApp() {
   const router = useRouter();
-  const addQuestionMutation = trpc.useMutation("auth.add-app", {
+  const addAppMutation = trpc.useMutation("auth.add-app", {
     onError: (error) => {
       toast.error(`Something went wrong: ${error.message}`);
     },
@@ -21,14 +21,14 @@ export default function NewApp() {
     <div>
       <h2 className="text-2xl font-bold mb-6">Register a new OAuth application</h2>
       <CreateAppForm
-        isSubmitting={addQuestionMutation.isLoading}
+        isSubmitting={addAppMutation.isLoading}
         defaultValues={{
           name: "",
           description: "",
         }}
         backTo="/"
         onSubmit={(values) => {
-          addQuestionMutation.mutate(
+          addAppMutation.mutate(
             { name: values.name, description: values.description },
             {
               onSuccess: (data) => router.push(`/`),

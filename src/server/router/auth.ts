@@ -3,11 +3,6 @@ import { z } from "zod";
 import { createRouter } from "./context";
 
 export const authRouter = createRouter()
-  .query("get-all-apps", {
-    resolve({ ctx }) {
-      return ctx.prisma.app.findMany();
-    },
-  })
   .middleware(({ ctx, next }) => {
     if (!ctx.session) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
@@ -19,6 +14,11 @@ export const authRouter = createRouter()
         session: ctx.session,
       },
     });
+  })
+  .query("get-all-apps", {
+    resolve({ ctx }) {
+      return ctx.prisma.app.findMany();
+    },
   })
   .mutation("add-app", {
     input: z.object({
@@ -39,5 +39,17 @@ export const authRouter = createRouter()
       });
 
       return post;
+    },
+  })
+  .mutation("remove-app", {
+    input: z.object({
+      id: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      return ctx.prisma.app.delete({
+        where: {
+          id: input.id,
+        },
+      });
     },
   });

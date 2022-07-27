@@ -1,4 +1,3 @@
-import { signIn, signOut, useSession } from "next-auth/react";
 import { ButtonLink } from "~/components/button-link";
 import Card from "~/components/card";
 import Layout from "~/components/layout";
@@ -7,7 +6,6 @@ import { trpc } from "../utils/trpc";
 
 const Home: NextPageWithAuthAndLayout = () => {
   const { data: apps, isLoading } = trpc.useQuery(["auth.get-all-apps"]);
-  const { data } = useSession();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -23,6 +21,7 @@ const Home: NextPageWithAuthAndLayout = () => {
       <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-6">
         {apps?.map((app) => (
           <Card
+            id={app.id}
             key={app.id}
             name={app.name}
             clientId={app.client_id}
