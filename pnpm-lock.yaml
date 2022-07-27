@@ -22,6 +22,7 @@ specifiers:
   prisma: ^4.1.0
   react: 18.2.0
   react-dom: 18.2.0
+  react-hook-form: ^7.33.1
   react-hot-toast: ^2.3.0
   react-query: ^3.39.2
   superjson: ^1.9.1
@@ -40,6 +41,7 @@ dependencies:
   next-auth: 4.10.2_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.33.1_react@18.2.0
   react-hot-toast: 2.3.0_biqbaboplfbrettd7655fr4n2y
   react-query: 3.39.2_biqbaboplfbrettd7655fr4n2y
   superjson: 1.9.1
@@ -2088,6 +2090,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form/7.33.1_react@18.2.0:
+    resolution: {integrity: sha512-ydTfTxEJdvgjCZBj5DDXRc58oTEfnFupEwwTAQ9FSKzykEJkX+3CiAkGtAMiZG7IPWHuzgT6AOBfogiKhUvKgg==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-hot-toast/2.3.0_biqbaboplfbrettd7655fr4n2y:

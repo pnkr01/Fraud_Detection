@@ -1,22 +1,43 @@
 import { TRPCError } from "@trpc/server";
+import { z } from "zod";
 import { createRouter } from "./context";
 
 export const authRouter = createRouter()
-  .query("getSession", {
+  .query("get-all-apps", {
     resolve({ ctx }) {
-      return ctx.session;
+      return ctx.prisma.app.findMany();
     },
   })
-  .middleware(async ({ ctx, next }) => {
-    // Any queries or mutations after this middleware will
-    // raise an error unless there is a current session
+  .middleware(({ ctx, next }) => {
     if (!ctx.session) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
-    return next();
+
+    return next({
+      ctx: {
+        ...ctx,
+        session: ctx.session,
+      },
+    });
   })
-  .query("getSecretMessage", {
-    async resolve({ ctx }) {
-      return "You are logged in and can see this secret message!";
+  .mutation("add-app", {
+    input: z.object({
+      name: z.string().min(1),
+      description: z.string().min(1),
+    }),
+    async resolve({ ctx, input }) {
+      const post = await ctx.prisma.app.create({
+        data: {
+          name: input.name,
+          description: input.description,
+          user: {
+            connect: {
+              id: ctx.session.user.id,
+            },
+          },
+        },
+      });
+
+      return post;
     },
   });
