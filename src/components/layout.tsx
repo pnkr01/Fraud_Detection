@@ -16,7 +16,7 @@ export default function Layout({ children }: DefaultLayoutProps) {
       </Head>
       <header className="max-w-5xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center border-b pb-4">
-          <h1 className="text-xl font-bold text-indigo-700 uppercase">
+          <h1 className="text-xl font-bold text-slate-800 uppercase">
             Fraud Auth App
           </h1>
           {data?.user ? (
