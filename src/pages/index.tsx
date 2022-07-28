@@ -24,8 +24,7 @@ const Home: NextPageWithAuthAndLayout = () => {
             id={app.id}
             key={app.id}
             name={app.name}
-            clientId={app.client_id}
-            clientSecret={app.client_secret}
+            apiKey={app.api_key}
             description={app.description}
           />
         ))}

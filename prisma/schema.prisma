@@ -11,14 +11,13 @@ datasource db {
 }
 
 model App {
-    id            String   @id @default(cuid())
-    client_id     String   @unique @default(uuid())
-    client_secret String   @default(uuid())
-    name          String
-    user          User     @relation(fields: [userId], references: [id])
-    description   String?
-    created_at    DateTime @default(now())
-    userId        String
+    id          String   @id @default(cuid())
+    api_key     String   @unique @default(uuid())
+    name        String
+    user        User     @relation(fields: [userId], references: [id])
+    description String?
+    created_at  DateTime @default(now())
+    userId      String
 }
 
 // Necessary for Next auth

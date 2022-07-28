@@ -8,17 +8,10 @@ type CardProps = {
   id: string;
   name: string | null;
   description: string | null;
-  clientId: string | null;
-  clientSecret: string | null;
+  apiKey: string | null;
 };
 
-export default function Card({
-  id,
-  name,
-  description,
-  clientId,
-  clientSecret,
-}: CardProps) {
+export default function Card({ id, name, description, apiKey }: CardProps) {
   const removeAppMutation = trpc.useMutation("auth.remove-app", {
     onError: (error) => {
       toast.error(`Something went wrong: ${error.message}`);
@@ -32,14 +25,10 @@ export default function Card({
           {name}
         </h5>
         <p className="mb-3 font-normal text-gray-700">{description}</p>
-        <div className="border-y py-2 my-2">
+        <div className="border-y py-2 my-4">
           <div>
-            <h2 className="font-semibold">Client Id</h2>
-            <p>{clientId}</p>
-          </div>
-          <div>
-            <h2 className="font-semibold">Client Secret</h2>
-            <p>{clientSecret}</p>
+            <h2 className="font-semibold">API Key</h2>
+            <p>{apiKey}</p>
           </div>
         </div>
         <Button
