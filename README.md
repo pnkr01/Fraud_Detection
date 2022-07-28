@@ -1,10 +1,10 @@
-# Fraud Auth App
+
 <p align="center">
   <a href="https://github.com/iamsahebgiri/add-readme">
     <img alt="hack-on" height="80" src="https://raw.githubusercontent.com/iamsahebgiri/add-readme/main/static/add-readme.png">
   </a>
 </p>
-<h1 align="center">hack-on</h1>
+<h1 align="center">Fraud Auth App</h1>
 
 <div align="center">
 Another awesome project to make the world a better place.
