@@ -4,7 +4,6 @@ import 'package:quick_order/src/global/enums.dart';
 
 import '../global/constants.dart';
 import '../screens/home/home_screen.dart';
-import '../screens/profile/profile_screen.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
@@ -56,16 +55,16 @@ class CustomBottomNavBar extends StatelessWidget {
                 icon: SvgPicture.asset("assets/icons/Chat bubble Icon.svg"),
                 onPressed: () {},
               ),
-              IconButton(
-                icon: SvgPicture.asset(
-                  "assets/icons/User Icon.svg",
-                  color: MenuState.profile == selectedMenu
-                      ? kPrimaryColor
-                      : inActiveIconColor,
-                ),
-                onPressed: () =>
-                    Navigator.pushNamed(context, ProfileScreen.routeName),
-              ),
+              // IconButton(
+              //   icon: SvgPicture.asset(
+              //     "assets/icons/User Icon.svg",
+              //     color: MenuState.profile == selectedMenu
+              //         ? kPrimaryColor
+              //         : inActiveIconColor,
+              //   ),
+              //   onPressed: () =>
+              //       Navigator.pushNamed(context, ProfileScreen.routeName),
+              // ),
             ],
           )),
     );
