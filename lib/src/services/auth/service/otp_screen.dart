@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../components/new/newuserotp.dart';
-import '../components/old/old_user.dart';
+
+import '../components/new_user/new_otp_screen.dart';
+import '../components/old_user/old_otp_screen.dart';
 
 //TODOS: if we have newUser True --->
 //TODOS: 1. Save user info to firebase.
@@ -25,21 +26,16 @@ class OTPScreen extends StatefulWidget {
 
 class _OTPScreenState extends State<OTPScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFF091637),
-      body: !widget.isNewUser
-          ? OldUserOTPScreen(
+      body: widget.isNewUser
+          ? NewUserScreenOtp(
               phone: widget.phonenumber,
             )
           //TODOS : CREATE ACCOUNT, IF USER IS NEW..
-          : NewUserOTPScreen(
+          : OldUserScreenOtp(
               phone: widget.phonenumber,
             ),
     );

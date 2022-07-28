@@ -4,7 +4,8 @@ import 'package:quick_order/src/app_theme.dart';
 import 'package:quick_order/src/global/global.dart';
 import 'package:quick_order/src/screens/home/home_screen.dart';
 import 'package:quick_order/src/screens/splash/splash_screen.dart';
-import 'auth/components/signin.dart';
+
+import 'services/auth/components/signin.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

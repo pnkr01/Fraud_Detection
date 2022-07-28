@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:quick_order/src/global/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../global/errordialog.dart';
-import '../../../global/global.dart';
-import '../../../global/loading_dialog.dart';
-import '../../../screens/home/home_screen.dart';
+
+import '../../../../global/errordialog.dart';
+import '../../../../global/global.dart';
+import '../../../../global/loading_dialog.dart';
+import '../../../../screens/home/home_screen.dart';
 
 class BuildProfileBody extends StatefulWidget {
   final String phoneNumber;
@@ -25,7 +26,7 @@ class _BuildProfileBodyState extends State<BuildProfileBody> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Positioned(
-      top: size.height * 0.2,
+      top: size.height * 0.3,
       bottom: 0,
       left: size.width * 0.0002,
       right: size.width * 0.0002,
@@ -44,8 +45,10 @@ class _BuildProfileBodyState extends State<BuildProfileBody> {
                   controller: fullName,
                   keyboardType: TextInputType.name,
                   cursorHeight: 20,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
                     labelText: "Full Name *",
                   ),
                 ),
@@ -56,29 +59,26 @@ class _BuildProfileBodyState extends State<BuildProfileBody> {
                   controller: email,
                   keyboardType: TextInputType.name,
                   cursorHeight: 20,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
                     labelText: "Email *",
                   ),
                 ),
-                const SizedBox(
-                  height: 30.0,
+                SizedBox(
+                  height: getProportionateScreenHeight(40),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    validateForm(context);
-                    //TODOS: Send to account sucessfully created screen.
-                    //TODOS : on continue button clicked.
-                  },
-                  child: SizedBox(
-                    height: size.height * 0.06,
-                    width: double.infinity,
-                    child: const Center(
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(fontSize: 20.0),
-                      ),
-                    ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      validateForm(context);
+                      //TODOS: Send to account sucessfully created screen.
+                      //TODOS : on continue button clicked.
+                    },
+                    child: const Text('Continue'),
                   ),
                 ),
               ],
@@ -118,21 +118,19 @@ class _BuildProfileBodyState extends State<BuildProfileBody> {
         .doc(widget.phoneNumber)
         .set(
           ({
-            "userEmail": email.text.trim(),
-            "phoneNumber": widget.phoneNumber.trim(),
-            "fullName": fullName.text.trim(),
+            "email": email.text.trim(),
+            "phone": widget.phoneNumber.trim(),
+            "name": fullName.text.trim(),
           }),
         );
 
     SharedPreferences? sharedPreferences =
         await SharedPreferences.getInstance();
-
-    await sharedPreferences.setBool("walletOpen", false);
     await sharedPreferences.setString("email", email.text.trim());
     await SharedPreferences.getInstance();
-    await sharedPreferences.setString("fullName", fullName.text.trim());
+    await sharedPreferences.setString("name", fullName.text.trim());
     await sharedPreferences.setString(
-        "phoneNumber", sharedPreferences.getString("phone")!);
+        "phone", sharedPreferences.getString("phone") ?? '2222222222');
     Navigator.pop(context);
     Navigator.pushAndRemoveUntil(
       context,

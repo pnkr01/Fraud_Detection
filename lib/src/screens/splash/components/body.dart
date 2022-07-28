@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quick_order/src/global/components/default_button.dart';
 import 'package:quick_order/src/global/constants.dart';
 import 'package:quick_order/src/global/size_configuration.dart';
 import '../components/splash_content.dart';
-import '../../../components/default_button.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);

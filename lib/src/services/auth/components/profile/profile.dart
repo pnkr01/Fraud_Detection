@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quick_order/src/auth/components/profile/profile_header.dart';
-import 'package:quick_order/src/auth/components/profile/profilebody.dart';
+import 'package:quick_order/src/global/size_configuration.dart';
+
+import 'profile_header.dart';
+import 'profilebody.dart';
 
 class Profile extends StatelessWidget {
   final String phone;
@@ -11,6 +13,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(

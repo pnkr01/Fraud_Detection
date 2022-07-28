@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../../global/loading_dialog.dart';
-import '../../global/size_configuration.dart';
+import '../../../global/loading_dialog.dart';
+import '../../../global/size_configuration.dart';
 import '../service/otp_screen.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -85,6 +85,9 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
         );
       } else {
+        if (kDebugMode) {
+          print("Number not exist");
+        }
         Navigator.pop(context);
         Navigator.push(
           context,
@@ -92,7 +95,10 @@ class _OtpScreenState extends State<OtpScreen> {
             builder: (c) => OTPScreen(
               phonenumber: phoneController.text,
               isNewUser: true,
+              //false means user data will be there in firestore,fetch data
+              //from there and saved to sharedpref to use locally.
             ),
+            //send true to otpscreen
           ),
         );
       }

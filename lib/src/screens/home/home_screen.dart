@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../components/coustom_bottom_nav_bar.dart';
+import '../../global/components/coustom_bottom_nav_bar.dart';
 import '../../global/enums.dart';
 
 class HomeScreen extends StatelessWidget {

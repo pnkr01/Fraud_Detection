@@ -15,11 +15,12 @@ ThemeData theme() {
 
 InputDecorationTheme inputDecorationTheme() {
   return const InputDecorationTheme(
-      floatingLabelBehavior: FloatingLabelBehavior.always,
-      contentPadding: EdgeInsets.symmetric(horizontal: 42, vertical: 20),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20.00)),
-      ));
+    floatingLabelBehavior: FloatingLabelBehavior.always,
+    contentPadding: EdgeInsets.symmetric(horizontal: 42, vertical: 20),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(20.00)),
+    ),
+  );
 }
 
 TextTheme textTheme() {
