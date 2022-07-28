@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React, { MouseEventHandler } from "react";
 import { Button } from "./button";
 
@@ -16,7 +15,6 @@ export default function Card({
   apiKey,
   onDelete,
 }: CardProps) {
-  const router = useRouter();
   return (
     <div className="max-w-full bg-white rounded-lg border border-gray-200 shadow-sm">
       <div className="p-5">
