@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { ButtonLink } from "~/components/button-link";
 import Card from "~/components/card";
 import Layout from "~/components/layout";
@@ -5,7 +6,17 @@ import { NextPageWithAuthAndLayout } from "~/utils/types";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPageWithAuthAndLayout = () => {
-  const { data: apps, isLoading } = trpc.useQuery(["auth.get-all-apps"]);
+  const {
+    data: apps,
+    isLoading,
+    refetch,
+  } = trpc.useQuery(["auth.get-all-apps"]);
+
+  const removeAppMutation = trpc.useMutation("auth.remove-app", {
+    onError: (error) => {
+      toast.error(`Something went wrong: ${error.message}`);
+    },
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -26,6 +37,17 @@ const Home: NextPageWithAuthAndLayout = () => {
             name={app.name}
             apiKey={app.api_key}
             description={app.description}
+            onDelete={() => {
+              removeAppMutation.mutate(
+                { id: app.id },
+                {
+                  onSuccess: (data) => {
+                    toast.success(`Delete ${data.name} app successfully!`);
+                    refetch();
+                  },
+                }
+              );
+            }}
           />
         ))}
       </div>

@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
-import toast from "react-hot-toast";
-import { trpc } from "~/utils/trpc";
+import React, { MouseEventHandler } from "react";
 import { Button } from "./button";
 
 type CardProps = {
@@ -9,14 +7,15 @@ type CardProps = {
   name: string | null;
   description: string | null;
   apiKey: string | null;
+  onDelete: MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-export default function Card({ id, name, description, apiKey }: CardProps) {
-  const removeAppMutation = trpc.useMutation("auth.remove-app", {
-    onError: (error) => {
-      toast.error(`Something went wrong: ${error.message}`);
-    },
-  });
+export default function Card({
+  name,
+  description,
+  apiKey,
+  onDelete,
+}: CardProps) {
   const router = useRouter();
   return (
     <div className="max-w-full bg-white rounded-lg border border-gray-200 shadow-sm">
@@ -31,20 +30,7 @@ export default function Card({ id, name, description, apiKey }: CardProps) {
             <p>{apiKey}</p>
           </div>
         </div>
-        <Button
-          onClick={() => {
-            removeAppMutation.mutate(
-              { id: id },
-              {
-                onSuccess: (data) => {
-                  toast(`Delete ${data.name} app successfully!`);
-                  router.reload();
-                },
-              }
-            );
-          }}
-          variant="danger"
-        >
+        <Button onClick={onDelete} variant="danger">
           Delete app
         </Button>
       </div>
