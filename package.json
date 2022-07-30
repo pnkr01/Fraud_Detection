@@ -9,9 +9,17 @@
     "lint": "next lint",
     "postinstall": "prisma generate"
   },
+  "prisma": {
+    "seed": "node -r @swc-node/register prisma/seed.ts"
+  },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs-pro-react": "^1.3.1",
+    "@headlessui/react": "^1.6.6",
+    "@heroicons/react": "^1.0.6",
     "@next-auth/prisma-adapter": "^1.0.4",
     "@prisma/client": "^4.1.0",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.4",
     "@trpc/client": "^9.26.2",
     "@trpc/next": "^9.26.2",
     "@trpc/react": "^9.26.2",
@@ -23,12 +31,14 @@
     "react-hook-form": "^7.33.1",
     "react-hot-toast": "^2.3.0",
     "react-query": "^3.39.2",
+    "react-use": "^17.4.0",
     "superjson": "^1.9.1",
     "zod": "^3.17.3"
   },
   "devDependencies": {
     "@iconify/icons-fluent": "^1.2.15",
     "@iconify/react": "^3.2.2",
+    "@swc-node/register": "^1.5.1",
     "@tailwindcss/forms": "^0.5.2",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",

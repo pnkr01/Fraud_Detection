@@ -3,6 +3,26 @@ import { z } from "zod";
 import { createRouter } from "./context";
 
 export const authRouter = createRouter()
+  .query("getAllProducts", {
+    async resolve({ ctx }) {
+      return ctx.prisma.product.findMany();
+    },
+  })
+  .query("getOrderDetails", {
+    input: z.object({
+      orderId: z.number(),
+    }),
+    async resolve({ ctx, input }) {
+      return ctx.prisma.order.findFirst({
+        where: {
+          id: Number(input.orderId),
+        },
+        include: {
+          product: true
+        }
+      });
+    },
+  })
   .middleware(({ ctx, next }) => {
     if (!ctx.session) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
@@ -15,40 +35,33 @@ export const authRouter = createRouter()
       },
     });
   })
-  .query("get-all-apps", {
-    resolve({ ctx }) {
-      return ctx.prisma.app.findMany();
-    },
-  })
-  .mutation("add-app", {
+  .mutation("updateUser", {
     input: z.object({
-      name: z.string().min(1),
-      description: z.string().min(1),
+      age: z.number(),
+      gender: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const post = await ctx.prisma.app.create({
+      return ctx.prisma.user.update({
+        where: {
+          id: ctx.session.user.id,
+        },
         data: {
-          name: input.name,
-          description: input.description,
-          user: {
-            connect: {
-              id: ctx.session.user.id,
-            },
-          },
+          age: Number(input?.age),
+          gender: input?.gender,
         },
       });
-
-      return post;
     },
   })
-  .mutation("remove-app", {
+  .mutation("placeOrder", {
     input: z.object({
-      id: z.string(),
+      productId: z.string(),
     }),
     async resolve({ ctx, input }) {
-      return ctx.prisma.app.delete({
-        where: {
-          id: input.id,
+      return ctx.prisma.order.create({
+        data: {
+          userId: ctx.session.user.id,
+          productId: input.productId,
+          status: "placed",
         },
       });
     },

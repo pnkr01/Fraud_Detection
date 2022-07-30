@@ -2,12 +2,11 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "~/components/button";
 import { ButtonLink } from "~/components/button-link";
-import { Textarea } from "~/components/textarea";
 import { TextField } from "~/components/textfield";
 
 type FormData = {
-  name: string;
-  description: string;
+  age: number;
+  gender: string;
 };
 
 type PostFormProps = {
@@ -17,7 +16,7 @@ type PostFormProps = {
   onSubmit: SubmitHandler<FormData>;
 };
 
-export default function CreateAppForm({
+export default function AddProfileForm({
   defaultValues,
   isSubmitting,
   backTo,
@@ -41,22 +40,30 @@ export default function CreateAppForm({
         <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
           <div className="grid grid-cols-3 gap-6">
             <div className="col-span-full">
-              <TextField
-                {...register("name", { required: true })}
-                label="Name"
-                helperText="Good things always start with a good name"
-                autoFocus
-                required
-              />
+              <label
+                htmlFor="gender"
+                className="block font-medium text-md text-gray-700"
+              >
+                Gender
+              </label>
+              <select
+                {...register("gender", { required: true })}
+                className="mt-1 focus:ring-sky-500 focus:border-sky-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="prefer-not-to-say">Prefer not to say</option>
+                <option value="others">Others</option>
+              </select>
             </div>
           </div>
 
           <div>
-            <Textarea
-              {...register("description", { required: true })}
-              label="Application description"
-              helperText="Tell us why do you want this app"
-              rows={12}
+            <TextField
+              {...register("age", { required: true })}
+              label="Age"
+              type="number"
+              autoFocus
               required
             />
           </div>
@@ -68,11 +75,8 @@ export default function CreateAppForm({
               isLoading={isSubmitting}
               loadingChildren={`${defaultValues ? "Saving" : "Publishing"}`}
             >
-              Register application
+              Proceed
             </Button>
-            <ButtonLink href={backTo} variant="secondary">
-              Cancel
-            </ButtonLink>
           </div>
         </div>
       </div>

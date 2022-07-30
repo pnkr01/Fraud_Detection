@@ -4,6 +4,7 @@ import { AppProps } from "next/app";
 import { withTRPC } from "@trpc/next";
 import superjson from "superjson";
 import { SessionProvider, signIn, useSession } from "next-auth/react";
+import { FpjsProvider } from "@fingerprintjs/fingerprintjs-pro-react";
 import { Toaster } from "react-hot-toast";
 import { NextPageWithAuthAndLayout } from "~/utils/types";
 import type { AppRouter } from "~/server/router";
@@ -21,12 +22,19 @@ function MyApp({
 
   return (
     <SessionProvider session={session}>
-      {Component.auth ? (
-        <Auth>{getLayout(<Component {...pageProps} />)}</Auth>
-      ) : (
-        getLayout(<Component {...pageProps} />)
-      )}
-      <Toaster />
+      <FpjsProvider
+        loadOptions={{
+          apiKey: "DEy1L2x4fgu4GgmKzacy",
+          region: "ap",
+        }}
+      >
+        {Component.auth ? (
+          <Auth>{getLayout(<Component {...pageProps} />)}</Auth>
+        ) : (
+          getLayout(<Component {...pageProps} />)
+        )}
+        <Toaster />
+      </FpjsProvider>
     </SessionProvider>
   );
 }
@@ -36,7 +44,7 @@ function Auth({ children }: { children: React.ReactNode }) {
   const isUser = !!session?.user;
   React.useEffect(() => {
     if (status === "loading") return; // Do nothing while loading
-    if (!isUser) signIn(); // If not authenticated, force log in
+    if (!isUser) signIn("github", { callbackUrl: "/add-profile" }); // If not authenticated, force log in
   }, [isUser, status]);
 
   if (isUser) {

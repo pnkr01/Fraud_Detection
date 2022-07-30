@@ -1,28 +1,36 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mongodb" // NOTE: sqlite does not work with NextAuth.js
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
-model App {
-    id          String   @id @default(cuid()) @map("_id")
-    api_key     String   @unique @default(uuid())
-    name        String
-    user        User     @relation(fields: [userId], references: [id])
-    description String?
-    created_at  DateTime @default(now())
-    userId      String
+model Order {
+    id        Int      @id @default(autoincrement())
+    product   Product  @relation(fields: [productId], references: [id])
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String
+    status    String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    productId String
 }
 
-// Necessary for Next auth
+model Product {
+    id          String   @id @default(cuid())
+    name        String
+    price       Float
+    rating      Int
+    images      String[]
+    description String
+    features    String[]
+    Order       Order[]
+}
+
 model Account {
-    id                String  @id @default(cuid()) @map("_id")
+    id                String  @id @default(cuid())
     userId            String
     type              String
     provider          String
@@ -40,7 +48,7 @@ model Account {
 }
 
 model Session {
-    id           String   @id @default(cuid()) @map("_id")
+    id           String   @id @default(cuid())
     sessionToken String   @unique
     userId       String
     expires      DateTime
@@ -48,18 +56,21 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid()) @map("_id")
+    id            String    @id @default(cuid())
     name          String?
     email         String?   @unique
     emailVerified DateTime?
     image         String?
+    gender        String?
+    age           Int?
     accounts      Account[]
     sessions      Session[]
-    apps          App[]
+    createdAt     DateTime  @default(now())
+    orders        Order[]
 }
 
 model VerificationToken {
-    id         String   @id @map("_id")
+    id         String   @id
     identifier String
     token      String   @unique
     expires    DateTime
