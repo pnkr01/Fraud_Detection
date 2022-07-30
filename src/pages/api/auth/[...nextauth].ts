@@ -11,10 +11,13 @@ export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
     session({ session, user }) {
-      if (session.user) {
-        session.user.id = user.id;
-      }
-      return session;
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: user.id,
+        },
+      };
     },
   },
   // Configure one or more authentication providers
@@ -41,5 +44,16 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 };
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      image?: string | null;
+    };
+  }
+}
 
 export default NextAuth(authOptions);
