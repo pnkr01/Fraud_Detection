@@ -8,7 +8,7 @@ class IconBtnWithCounter extends StatelessWidget {
   const IconBtnWithCounter({
     Key? key,
     required this.svgSrc,
-    this.numOfitem = 0,
+    required this.numOfitem,
     required this.press,
   }) : super(key: key);
 
@@ -18,7 +18,7 @@ class IconBtnWithCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return InkWell (
       borderRadius: BorderRadius.circular(100),
       onTap: press,
       child: Stack(

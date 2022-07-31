@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:quick_order/src/global/errordialog.dart';
+import 'package:quick_order/src/global/global.dart';
 import '../../../global/loading_dialog.dart';
 import '../../../global/size_configuration.dart';
 import '../service/otp_screen.dart';
@@ -62,45 +64,61 @@ class _OtpScreenState extends State<OtpScreen> {
     print('here..........................');
     // User? currentUser = firebaseAuth.currentUser;
     await FirebaseFirestore.instance
-        .collection("phone")
-        .doc(phoneController.text)
+        .collection('flagged-user')
+        .doc(sharedPreferences!.getString('phone'))
         .get()
-        .then((value) async {
-      if (value.exists) {
-        if (kDebugMode) {
-          print("Number exist on backend");
-        }
-        //if user is  already there in firebase
-        Navigator.pop(context);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (c) => OTPScreen(
-              phonenumber: phoneController.text,
-              isNewUser: false,
-              //false means user data will be there in firestore,fetch data
-              //from there and saved to sharedpref to use locally.
-            ),
-            //send true to otpscreen
-          ),
-        );
+        .then((value) {
+      if (!value.exists) {
+        FirebaseFirestore.instance
+            .collection("phone")
+            .doc(phoneController.text)
+            .get()
+            .then((value) async {
+          if (value.exists) {
+            if (kDebugMode) {
+              print("Number exist on backend");
+            }
+            //if user is  already there in firebase
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (c) => OTPScreen(
+                  phonenumber: phoneController.text,
+                  isNewUser: false,
+                  //false means user data will be there in firestore,fetch data
+                  //from there and saved to sharedpref to use locally.
+                ),
+                //send true to otpscreen
+              ),
+            );
+          } else {
+            if (kDebugMode) {
+              print("Number not exist");
+            }
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (c) => OTPScreen(
+                  phonenumber: phoneController.text,
+                  isNewUser: true,
+                  //false means user data will be there in firestore,fetch data
+                  //from there and saved to sharedpref to use locally.
+                ),
+                //send true to otpscreen
+              ),
+            );
+          }
+        });
       } else {
-        if (kDebugMode) {
-          print("Number not exist");
-        }
-        Navigator.pop(context);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (c) => OTPScreen(
-              phonenumber: phoneController.text,
-              isNewUser: true,
-              //false means user data will be there in firestore,fetch data
-              //from there and saved to sharedpref to use locally.
-            ),
-            //send true to otpscreen
-          ),
-        );
+        showDialog(
+            context: context,
+            builder: (context) => const ErrorDialog(
+                  message:
+                      'Your account is flagged, contact customer support at abc@gmail.com',
+                )).then((value) => Navigator.pop(context));
+        // Navigator.pop(context);
       }
     });
   }
@@ -139,6 +157,14 @@ class _OtpScreenState extends State<OtpScreen> {
             left: 0,
             right: 0,
             child: Container(
+              child: Text(
+                '            Sign In',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: getProportionateScreenHeight(40),
+                ),
+              ),
               color: const Color(0xFFFF9900),
             ),
           ),

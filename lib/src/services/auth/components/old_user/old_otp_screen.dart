@@ -12,6 +12,7 @@ import '../../../../global/global.dart';
 import '../../../../global/loading_dialog.dart';
 import '../../../../global/size_configuration.dart';
 import '../../../../screens/home/home_screen.dart';
+
 class OldUserScreenOtp extends StatefulWidget {
   final String phone;
   const OldUserScreenOtp({
@@ -89,10 +90,17 @@ class _OldUserScreenOtpState extends State<OldUserScreenOtp> {
         .then((snap) async {
       // await  sharedPreferences!.setString("uid", currentUser.uid);
       await sharedPreferences!.setString("name", snap.data()!["name"]);
+      await sharedPreferences!.setString("phone", snap.data()!["phone"]);
+      await sharedPreferences!.setString("email", snap.data()!["email"]);
+      await sharedPreferences!.setString("address", snap.data()!["address"]);
+
+      await sharedPreferences!.setString("age", snap.data()!["age"]);
+      await sharedPreferences!.setString("gender", snap.data()!["gender"]);
+      await sharedPreferences!.setString("source", snap.data()!["source"]);
+      await sharedPreferences!.setString("browser", snap.data()!["browser"]);
+      await sharedPreferences!.setString("ip", snap.data()!["ip"]);
       await sharedPreferences!
-          .setString("phone", snap.data()!["phone"]);
-      await sharedPreferences!
-          .setString("email", snap.data()!["email"]);
+          .setString("signuptime", snap.data()!["signuptime"]);
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,
@@ -283,7 +291,7 @@ class _OldUserScreenOtpState extends State<OldUserScreenOtp> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                           validate();
+                          validate();
                         },
                         child: const Text('Continue and LogIn'),
                       ),

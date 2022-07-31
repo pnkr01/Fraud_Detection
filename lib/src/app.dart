@@ -2,9 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:quick_order/src/app_theme.dart';
 import 'package:quick_order/src/global/global.dart';
+import 'package:quick_order/src/screens/cart/cart_screen.dart';
+import 'package:quick_order/src/screens/details/details_screen.dart';
 import 'package:quick_order/src/screens/home/home_screen.dart';
 import 'package:quick_order/src/screens/splash/splash_screen.dart';
-
+import 'package:quick_order/src/services/api/ip_address.dart';
+import 'login_success/order_success_screen.dart';
 import 'services/auth/components/signin.dart';
 
 class MyApp extends StatelessWidget {
@@ -20,6 +23,9 @@ class MyApp extends StatelessWidget {
         '/splash': (context) => const SplashScreen(),
         '/signInCumLogIn': (context) => const OtpScreen(),
         '/home': (context) => const HomeScreen(),
+        '/CartScreen': (context) => const CartScreen(),
+        '/details': (context) => const DetailsScreen(),
+        '/orderPlaced': (context) => const OtpSuccessScreen(),
       },
     );
   }
@@ -37,6 +43,12 @@ class _HandleOnboardingState extends State<HandleOnboarding> {
   void initState() {
     setTimer();
     super.initState();
+    initIp();
+  }
+
+  Future initIp() async {
+    final ipAddress = await IPInfo.getIpAddress();
+    sharedPreferences!.setString('ip', ipAddress!);
   }
 
   setTimer() {

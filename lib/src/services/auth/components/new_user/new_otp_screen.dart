@@ -72,6 +72,11 @@ class _NewUserScreenOtpState extends State<NewUserScreenOtp> {
       if (kDebugMode) {
         print('User cred...........................................');
         print(userCredential);
+        sharedPreferences!.setString('source', 'app');
+        sharedPreferences!.setString('browser', 'app');
+        DateTime? signup = userCredential.user!.metadata.creationTime;
+        sharedPreferences!.setString('signuptime', signup!.toIso8601String().substring(11,19));
+        print(sharedPreferences!.getString('signuptime'));
       }
       if (kDebugMode) {
         print("Sending user to profile page to save details");

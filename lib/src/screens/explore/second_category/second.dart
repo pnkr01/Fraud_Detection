@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quick_order/src/global/size_configuration.dart';
-import 'package:quick_order/src/screens/home/components/product_card.dart';
-import '../../../models/product.dart';
-import 'section_title.dart';
+import 'package:quick_order/src/models/product.dart';
+import '../../home/components/section_title.dart';
+import 'secondary_card.dart';
 
-class PopularProducts extends StatelessWidget {
-  const PopularProducts({Key? key}) : super(key: key);
+class NewInProduct extends StatelessWidget {
+  const NewInProduct({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +14,7 @@ class PopularProducts extends StatelessWidget {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: SectionTitle(
-              title: "Popular Products",
-              press: () {
-              }),
+          child: SectionTitle(title: "New In Product", press: () {}),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
@@ -25,16 +22,18 @@ class PopularProducts extends StatelessWidget {
           child: Row(
             children: [
               ...List.generate(
-                demoProducts.length,
+                demoNewInProduct.length,
                 (index) {
-                  if (demoProducts[index].isPopular) {
-                    return ProductCard(product: demoProducts[index]);
+                  if (demoNewInProduct[index].isNew) {
+                    return NewInnewproductCard(
+                      newproduct: demoNewInProduct[index],
+                    );
                   }
                   return const SizedBox
                       .shrink(); // here by default width and height is 0
                 },
               ),
-              SizedBox(width: getProportionateScreenWidth(20)),
+              // SizedBox(width: getProportionateScreenWidth(20)),
             ],
           ),
         )
