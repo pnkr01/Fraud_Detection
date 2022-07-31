@@ -17,7 +17,7 @@ class SplashContent extends StatelessWidget {
       children: <Widget>[
         const Spacer(),
         Text(
-          "CHUTKI ",
+          "HackOn",
           style: TextStyle(
             fontSize: getProportionateScreenWidth(36),
             color: kPrimaryColor,

@@ -212,7 +212,7 @@ class _Profile1State extends State<Profile> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          sharedPreferences!.getString('signuptime')!,
+                          sharedPreferences!.getString('signuptime') ?? DateTime.now().toIso8601String().substring(11,19),
                           style: const TextStyle(
                             fontSize: 16,
                             height: 1.4,
