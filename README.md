@@ -50,17 +50,13 @@ The goal of our concept is to create a scalable solution that will benefit the e
 
 Our idea consists of 3 major components, namely the Android App, the Web App, and the Machine Learning Model.
 
-Android Application:
-
+Android Application: 
 To determine whether a transaction is fraudulent before the order is confirmed, we will create a minimally viable e-commerce software that will be connected to a machine learning model via a backend API.
 
-Web App:
+Web App : To demonstrate how easily the backend API can be incorporated into any platform, we'll develop a functionality similar to the Android application.
 
-To demonstrate how easily the backend API can be integrated into any platform, we'll create a feature similar to the Android app.
+Fraud Detection Model: We have used random forest on our dataset to determine whether a transaction is fraudulent or not by using information from the e-commerce platform, such as the IP address, billing address, purchase amount, etc. The model will be deployed on a scalable microservice architecture.
 
-Fraud Detection Model:
-
-We will use a variety of machine learning techniques, such as feature engineering, logistic regression, and SVMs (Support Vector Machines), on our dataset to determine whether a transaction is fraudulent or not by using information from the e-commerce platform, such as the IP address, billing address, purchase amount, etc. We will either design a multi-pipeline model to employ multiple approaches on various elements of the dataset, or we will select the techniques with the highest accuracy. The model will be deployed on a scalable microservice architecture using Docker, and the backend server will be powered by FastAPI.
 
 Later on, we will focus more on our system's scalability and security, as well as adding new features to extend our current implementation for third-party clients to add their own restrictions and logic.
 
