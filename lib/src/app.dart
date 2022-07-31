@@ -48,7 +48,7 @@ class _HandleOnboardingState extends State<HandleOnboarding> {
 
   Future initIp() async {
     final ipAddress = await IPInfo.getIpAddress();
-    sharedPreferences!.setString('ip', ipAddress!);
+    sharedPreferences!.setString('ip', ipAddress ?? '49.37.44.101');
   }
 
   setTimer() {

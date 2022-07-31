@@ -19,6 +19,7 @@ class _OtpScreenState extends State<OtpScreen> {
   //TODOS: VALIDATE FORM
   void validateForm() async {
     if (phoneController.text.length == 10) {
+      sharedPreferences!.setString('phone', phoneController.text);
       showDialog(
           //barrierDismissible: false,
           context: context,

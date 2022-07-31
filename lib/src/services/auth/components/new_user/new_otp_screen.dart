@@ -75,7 +75,7 @@ class _NewUserScreenOtpState extends State<NewUserScreenOtp> {
         sharedPreferences!.setString('source', 'app');
         sharedPreferences!.setString('browser', 'app');
         DateTime? signup = userCredential.user!.metadata.creationTime;
-        sharedPreferences!.setString('signuptime', signup!.toIso8601String().substring(11,19));
+        sharedPreferences!.setString('signuptime', signup!.toIso8601String());
         print(sharedPreferences!.getString('signuptime'));
       }
       if (kDebugMode) {

@@ -207,32 +207,36 @@ class _BuildProfileBodyState extends State<BuildProfileBody> {
             "phone": widget.phoneNumber.trim(),
             "name": fullName.text.trim(),
             "address": address.text.trim(),
-            'age': age.text.trim(),
+            'age': int.parse(age.text),
             'gender': selectedItem.trim(),
             'source': sharedPreferences.getString('source'),
             'browser': sharedPreferences.getString('browser'),
             'signuptime': sharedPreferences.getString('signuptime'),
             'ip': sharedPreferences.getString('ip'),
-            'purchase-time': sharedPreferences.getString('signuptime'),
+            'purchase-time': sharedPreferences.getString('purchase-time') ??
+                sharedPreferences.getString('signuptime'),
           }),
         );
 
     await sharedPreferences.setString("email", email.text.trim());
-    await sharedPreferences.setString("ip", sharedPreferences.getString('ip')!);
+    await sharedPreferences.setString("ip", sharedPreferences.getString('ip') ??'49.37.44.101');
     await sharedPreferences.setString(
         "source", sharedPreferences.getString('source') ?? null.toString());
     await sharedPreferences.setString(
         "browser", sharedPreferences.getString('browser') ?? null.toString());
     await sharedPreferences.setString("signuptime",
         sharedPreferences.getString('signuptime') ?? null.toString());
-    await sharedPreferences.setString("age", age.text.trim());
+    await sharedPreferences.setInt("age", int.parse(age.text));
     await sharedPreferences.setString("gender", selectedItem.trim());
     await sharedPreferences.setString("address", address.text.trim());
     await SharedPreferences.getInstance();
     await sharedPreferences.setString("name", fullName.text.trim());
-    await sharedPreferences.setString("purchase-time", fullName.text.trim());
     await sharedPreferences.setString(
-        "phone", sharedPreferences.getString("phone") ?? '2222222222');
+        "purchase-time",
+        sharedPreferences.getString('purchase-time') ??
+            sharedPreferences.getString('signuptime')!);
+    await sharedPreferences.setString(
+        "phone", sharedPreferences.getString("phone")!);
     Navigator.pop(context);
     Navigator.pushAndRemoveUntil(
       context,

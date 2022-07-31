@@ -94,13 +94,15 @@ class _OldUserScreenOtpState extends State<OldUserScreenOtp> {
       await sharedPreferences!.setString("email", snap.data()!["email"]);
       await sharedPreferences!.setString("address", snap.data()!["address"]);
 
-      await sharedPreferences!.setString("age", snap.data()!["age"]);
+      await sharedPreferences!.setInt("age", snap.data()!["age"]);
       await sharedPreferences!.setString("gender", snap.data()!["gender"]);
       await sharedPreferences!.setString("source", snap.data()!["source"]);
       await sharedPreferences!.setString("browser", snap.data()!["browser"]);
-      await sharedPreferences!.setString("ip", snap.data()!["ip"]);
+      await sharedPreferences!.setString("ip", snap.data()!["ip"] ?? '49.37.44.101');
       await sharedPreferences!
           .setString("signuptime", snap.data()!["signuptime"]);
+      await sharedPreferences!
+          .setString("purchase-time", snap.data()!["purchase-time"] ?? "2022-07-31T11:07:09.768Z");
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,
