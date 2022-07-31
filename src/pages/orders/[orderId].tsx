@@ -3,29 +3,6 @@ import React, { useEffect, useState } from "react";
 import Layout from "~/components/layout";
 import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
 import { trpc } from "~/utils/trpc";
-import { useLocation } from "react-use";
-
-const products = [
-  {
-    id: 1,
-    name: "Nomad Tumbler",
-    description:
-      "This durable and portable insulated tumbler will keep your beverage at the perfect temperature during your next adventure.",
-    href: "#",
-    price: "35.00",
-    status:
-      "Can't process your order further. Your account has been blocked because our system detect it's a fraud transaction.",
-    step: 1,
-    date: "March 24, 2021",
-    datetime: "2021-03-24",
-    address: ["Floyd Miles", "7363 Cynthia Pass", "Toronto, ON N3Y 4H8"],
-    email: "f•••@example.com",
-    phone: "1•••••••••40",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/confirmation-page-03-product-01.jpg",
-    imageAlt: "Insulated bottle with white base and black snap lid.",
-  },
-];
 
 export default function OrderPage() {
   const { query } = useRouter();
@@ -49,10 +26,10 @@ const CheckFraudComponent = () => {
     fetch("https://api.ipify.org/?format=json")
       .then((res) => res.json())
       .then((data) => {
-        setInfo({
-          ...info,
+        setInfo((oldState) => ({
+          ...oldState,
           ip: data.ip,
-        });
+        }));
       });
   }, []);
 
@@ -60,10 +37,28 @@ const CheckFraudComponent = () => {
     return <div>Loading...</div>;
   }
 
+  let userAgent = navigator.userAgent;
+  let browserName;
+
+  if (userAgent.match(/chrome|chromium|crios/i)) {
+    browserName = "chrome";
+  } else if (userAgent.match(/firefox|fxios/i)) {
+    browserName = "firefox";
+  } else if (userAgent.match(/safari/i)) {
+    browserName = "safari";
+  } else if (userAgent.match(/opr\//i)) {
+    browserName = "opera";
+  } else if (userAgent.match(/edg/i)) {
+    browserName = "edge";
+  } else {
+    browserName = "No browser detection";
+  }
+
   return (
     <div>
       <pre>{JSON.stringify(info)}</pre>
-      <pre>{JSON.stringify(visitorData)}</pre>
+      <pre>Device ID:{JSON.stringify(visitorData?.visitorId)}</pre>
+      <pre>Browser:{browserName}</pre>
     </div>
   );
 };
@@ -140,7 +135,7 @@ function OrderPageContent({ orderId }: { orderId: number }) {
           </div>
         </div>
       </section>
-      <CheckFraudComponent />
+      {/* <CheckFraudComponent /> */}
     </main>
   );
 }

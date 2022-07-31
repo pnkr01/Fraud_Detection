@@ -119,7 +119,7 @@ const Home: NextPageWithAuthAndLayout = () => {
                           </span>
                           <span
                             className={classNames(
-                              selected ? "ring-indigo-500" : "ring-transparent",
+                              selected ? "ring-orange-500" : "ring-transparent",
                               "absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none"
                             )}
                             aria-hidden="true"
@@ -165,7 +165,7 @@ const Home: NextPageWithAuthAndLayout = () => {
                         key={rating}
                         className={classNames(
                           product.rating > rating
-                            ? "text-indigo-500"
+                            ? "text-orange-500"
                             : "text-gray-300",
                           "h-5 w-5 flex-shrink-0"
                         )}
@@ -277,7 +277,7 @@ const Home: NextPageWithAuthAndLayout = () => {
                             <Disclosure.Button className="group relative w-full py-6 flex justify-between items-center text-left">
                               <span
                                 className={classNames(
-                                  open ? "text-indigo-600" : "text-gray-900",
+                                  open ? "text-orange-600" : "text-gray-900",
                                   "text-sm font-medium"
                                 )}
                               >
@@ -286,7 +286,7 @@ const Home: NextPageWithAuthAndLayout = () => {
                               <span className="ml-6 flex items-center">
                                 {open ? (
                                   <MinusSmIcon
-                                    className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
+                                    className="block h-6 w-6 text-orange-400 group-hover:text-orange-500"
                                     aria-hidden="true"
                                   />
                                 ) : (
@@ -349,7 +349,7 @@ const Home: NextPageWithAuthAndLayout = () => {
                             key={rating}
                             className={classNames(
                               product.rating > rating
-                                ? "text-indigo-500"
+                                ? "text-orange-500"
                                 : "text-gray-300",
                               "h-5 w-5 flex-shrink-0"
                             )}

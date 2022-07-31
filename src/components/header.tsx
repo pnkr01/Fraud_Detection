@@ -132,7 +132,7 @@ export default function Header() {
                         className={({ selected }: any) =>
                           classNames(
                             selected
-                              ? "text-indigo-600 border-indigo-600"
+                              ? "text-orange-600 border-orange-600"
                               : "text-gray-900 border-transparent",
                             "flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium"
                           )
@@ -291,11 +291,29 @@ export default function Header() {
                 <div className="hidden lg:flex lg:items-center">
                   <a href="#">
                     <span className="sr-only">Workflow</span>
-                    <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                      alt=""
-                    />
+                    <svg
+                      id="logo-38"
+                      height="28"
+                      viewBox="0 0 78 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z"
+                        className="ccustom"
+                        fill="#FF7A00"
+                      ></path>
+                      <path
+                        d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z"
+                        className="ccompli1"
+                        fill="#FF9736"
+                      ></path>
+                      <path
+                        d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z"
+                        className="ccompli2"
+                        fill="#FFBC7D"
+                      ></path>
+                    </svg>
                   </a>
                 </div>
 
@@ -311,7 +329,7 @@ export default function Header() {
                                 <Popover.Button
                                   className={classNames(
                                     open
-                                      ? "border-indigo-600 text-indigo-600"
+                                      ? "border-orange-600 text-orange-600"
                                       : "border-transparent text-gray-700 hover:text-gray-800",
                                     "relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px"
                                   )}
@@ -515,11 +533,29 @@ export default function Header() {
                 {/* Logo (lg-) */}
                 <a href="#" className="lg:hidden">
                   <span className="sr-only">Workflow</span>
-                  <img
-                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                    alt=""
-                    className="h-8 w-auto"
-                  />
+                  <svg
+                    id="logo-38"
+                    height="28"
+                    viewBox="0 0 78 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z"
+                      className="ccustom"
+                      fill="#FF7A00"
+                    ></path>
+                    <path
+                      d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z"
+                      className="ccompli1"
+                      fill="#FF9736"
+                    ></path>
+                    <path
+                      d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z"
+                      className="ccompli2"
+                      fill="#FFBC7D"
+                    ></path>
+                  </svg>
                 </a>
 
                 <div className="flex-1 flex items-center justify-end">
