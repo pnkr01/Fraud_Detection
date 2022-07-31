@@ -18,8 +18,9 @@ export const authRouter = createRouter()
           id: Number(input.orderId),
         },
         include: {
-          product: true
-        }
+          product: true,
+          user: true,
+        },
       });
     },
   })

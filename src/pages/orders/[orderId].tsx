@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Layout from "~/components/layout";
+import { CheckCircleIcon } from "@heroicons/react/solid";
 import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
 import { trpc } from "~/utils/trpc";
 
@@ -15,27 +16,85 @@ export default function OrderPage() {
   return <OrderPageContent orderId={Number(orderId)} />;
 }
 
-const CheckFraudComponent = () => {
-  const [info, setInfo] = useState({
-    ip: undefined,
-    deviceId: undefined,
-  });
-  const { data: visitorData, isLoading, error } = useVisitorData();
+const CheckFraudComponent = ({
+  age,
+  sex,
+  purchase_value,
+  signup_time,
+  purchase_time,
+}: any) => {
+  const [ip, setIp] = useState("");
+  const { data: visitorData } = useVisitorData();
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<any>(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetch("https://api.ipify.org/?format=json")
       .then((res) => res.json())
       .then((data) => {
-        setInfo((oldState) => ({
-          ...oldState,
-          ip: data.ip,
-        }));
+        setIp(data.ip);
       });
   }, []);
 
+  useEffect(() => {
+    if (ip !== "" && visitorData) {
+      let userAgent = navigator.userAgent;
+      let browserName;
+
+      if (userAgent.match(/chrome|chromium|crios/i)) {
+        browserName = "chrome";
+      } else if (userAgent.match(/firefox|fxios/i)) {
+        browserName = "firefox";
+      } else if (userAgent.match(/safari/i)) {
+        browserName = "safari";
+      } else if (userAgent.match(/opr\//i)) {
+        browserName = "opera";
+      } else if (userAgent.match(/edg/i)) {
+        browserName = "edge";
+      } else {
+        browserName = "No browser detection";
+      }
+      const data = {
+        api_key: "cccad4cc-c158-4aa7-973d-42e4bd1ee306",
+        user_id: 0,
+        purchase_value,
+        sex,
+        age,
+        signup_time,
+        purchase_time,
+        source: "direct",
+        device_id: visitorData.visitorId,
+        ip_address: ip,
+      };
+
+      setIsLoading(true);
+      fetch("https://fraud-detect.deta.dev/api/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setData(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(err.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [visitorData, ip]);
+
   if (isLoading) {
     return (
-      <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
+      <div className="rounded-md p-4 w-full mx-auto">
         <div className="animate-pulse flex space-x-4">
           <div className="rounded-full bg-slate-200 h-10 w-10"></div>
           <div className="flex-1 space-y-6 py-1">
@@ -53,28 +112,73 @@ const CheckFraudComponent = () => {
     );
   }
 
-  let userAgent = navigator.userAgent;
-  let browserName;
-
-  if (userAgent.match(/chrome|chromium|crios/i)) {
-    browserName = "chrome";
-  } else if (userAgent.match(/firefox|fxios/i)) {
-    browserName = "firefox";
-  } else if (userAgent.match(/safari/i)) {
-    browserName = "safari";
-  } else if (userAgent.match(/opr\//i)) {
-    browserName = "opera";
-  } else if (userAgent.match(/edg/i)) {
-    browserName = "edge";
-  } else {
-    browserName = "No browser detection";
+  if (data.score >= 0 && data.score <= 3) {
+    return (
+      <div>
+        <div className="rounded-md bg-green-50 p-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <CheckCircleIcon
+                className="h-5 w-5 text-green-400"
+                aria-hidden="true"
+              />
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-green-800">
+                Order placed, looks good!
+              </h3>
+              <div className="mt-2 text-sm text-green-700">
+                <p>Now you can proceed to checkout.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } else if (data.score > 3 && data.score <= 7) {
+    return (
+      <div>
+        <div className="rounded-md bg-yellow-50 p-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <CheckCircleIcon
+                className="h-5 w-5 text-yellow-400"
+                aria-hidden="true"
+              />
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-yellow-800">
+                Need Manual Investigation
+              </h3>
+              <div className="mt-2 text-sm text-yellow-700">
+                <p>You are not allowed to proceed to checkout.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
-
   return (
     <div>
-      <pre>{JSON.stringify(info)}</pre>
-      <pre>Device ID:{JSON.stringify(visitorData?.visitorId)}</pre>
-      <pre>Browser:{browserName}</pre>
+      <div className="rounded-md bg-red-50 p-4">
+        <div className="flex">
+          <div className="flex-shrink-0">
+            <CheckCircleIcon
+              className="h-5 w-5 text-red-400"
+              aria-hidden="true"
+            />
+          </div>
+          <div className="ml-3">
+            <h3 className="text-sm font-medium text-red-800">
+              Your transaction has been declined.
+            </h3>
+            <div className="mt-2 text-sm text-red-700">
+              <p>You are not allowed to proceed to checkout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -84,12 +188,15 @@ function OrderPageContent({ orderId }: { orderId: number }) {
     "auth.getOrderDetails",
     { orderId },
   ]);
-  if (isLoading) return <div className="my-36 p-4 max-w-sm text-center w-full mx-auto">Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="my-36 p-4 max-w-sm text-center w-full mx-auto">
+        Loading...
+      </div>
+    );
   if (!data) return <div>No order exists!</div>;
   if (isError) return <div>Something went wrong!</div>;
 
-  if (data) {
-  }
   return (
     <main className="max-w-2xl mx-auto pt-8 pb-24 sm:pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="px-4 space-y-2 sm:px-0 sm:flex sm:items-baseline sm:justify-between sm:space-y-0">
@@ -146,12 +253,18 @@ function OrderPageContent({ orderId }: { orderId: number }) {
 
             <div className="border-t border-gray-200 py-6 px-4 sm:px-6 lg:p-8">
               <h4 className="sr-only">Status</h4>
-              <p className="text-sm font-medium text-red-600">{data.status}</p>
+
+              <CheckFraudComponent
+                age={data.user.age}
+                sex={data.user.gender === "male" ? "M" : "F"}
+                purchase_value={data.product.price}
+                signup_time={data.user.createdAt.toISOString()}
+                purchase_time={data.createdAt.toISOString()}
+              />
             </div>
           </div>
         </div>
       </section>
-      {/* <CheckFraudComponent /> */}
     </main>
   );
 }
