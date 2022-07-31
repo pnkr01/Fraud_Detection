@@ -107,11 +107,11 @@ export default function Footer() {
 
         <div className="border-t border-gray-100 py-10 sm:flex sm:items-center sm:justify-between">
           <div className="flex items-center justify-center text-sm text-gray-500">
-            <p>Shipping to Canada ($CAD)</p>
+            <p>Shipping to India (INR)</p>
             <p className="ml-3 border-l border-gray-200 pl-3">English</p>
           </div>
           <p className="mt-6 text-sm text-gray-500 text-center sm:mt-0">
-            &copy; 2021 Clothing Company, Ltd.
+            &copy; 2022 Seh Lenge Thoda
           </p>
         </div>
       </div>
