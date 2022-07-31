@@ -292,7 +292,7 @@ export default function Header() {
                 <div className="hidden lg:flex lg:items-center">
                   <Link href="/">
                     <a>
-                      <span className="sr-only">Workflow</span>
+                      <span className="sr-only">Seh Lenge Thoda</span>
                       <svg
                         id="logo-38"
                         height="28"
@@ -534,32 +534,34 @@ export default function Header() {
                 </div>
 
                 {/* Logo (lg-) */}
-                <a href="#" className="lg:hidden">
-                  <span className="sr-only">Workflow</span>
-                  <svg
-                    id="logo-38"
-                    height="28"
-                    viewBox="0 0 78 32"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z"
-                      className="ccustom"
-                      fill="#FF7A00"
-                    ></path>
-                    <path
-                      d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z"
-                      className="ccompli1"
-                      fill="#FF9736"
-                    ></path>
-                    <path
-                      d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z"
-                      className="ccompli2"
-                      fill="#FFBC7D"
-                    ></path>
-                  </svg>
-                </a>
+                <Link href="/">
+                    <a className="lg:hidden">
+                      <span className="sr-only">Seh Lenge Thoda</span>
+                      <svg
+                        id="logo-38"
+                        height="28"
+                        viewBox="0 0 78 32"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z"
+                          className="ccustom"
+                          fill="#FF7A00"
+                        ></path>
+                        <path
+                          d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z"
+                          className="ccompli1"
+                          fill="#FF9736"
+                        ></path>
+                        <path
+                          d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z"
+                          className="ccompli2"
+                          fill="#FFBC7D"
+                        ></path>
+                      </svg>
+                    </a>
+                  </Link>
 
                 <div className="flex-1 flex items-center justify-end">
                   <div className="flex items-center lg:ml-8">
