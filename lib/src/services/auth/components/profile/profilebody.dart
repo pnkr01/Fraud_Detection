@@ -213,6 +213,7 @@ class _BuildProfileBodyState extends State<BuildProfileBody> {
             'browser': sharedPreferences.getString('browser'),
             'signuptime': sharedPreferences.getString('signuptime'),
             'ip': sharedPreferences.getString('ip'),
+            'purchase-time': sharedPreferences.getString('signuptime'),
           }),
         );
 
@@ -229,6 +230,7 @@ class _BuildProfileBodyState extends State<BuildProfileBody> {
     await sharedPreferences.setString("address", address.text.trim());
     await SharedPreferences.getInstance();
     await sharedPreferences.setString("name", fullName.text.trim());
+    await sharedPreferences.setString("purchase-time", fullName.text.trim());
     await sharedPreferences.setString(
         "phone", sharedPreferences.getString("phone") ?? '2222222222');
     Navigator.pop(context);

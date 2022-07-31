@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:quick_order/src/app_theme.dart';
 import 'package:quick_order/src/global/global.dart';
+import 'package:quick_order/src/order_success/order_success_screen.dart';
 import 'package:quick_order/src/screens/cart/cart_screen.dart';
 import 'package:quick_order/src/screens/details/details_screen.dart';
 import 'package:quick_order/src/screens/home/home_screen.dart';
 import 'package:quick_order/src/screens/splash/splash_screen.dart';
 import 'package:quick_order/src/services/api/ip_address.dart';
-import 'login_success/order_success_screen.dart';
 import 'services/auth/components/signin.dart';
 
 class MyApp extends StatelessWidget {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomeScreen(),
         '/CartScreen': (context) => const CartScreen(),
         '/details': (context) => const DetailsScreen(),
-        '/orderPlaced': (context) => const OtpSuccessScreen(),
+        '/orderPlaced': (context) => const OrderSucess(),
       },
     );
   }
@@ -84,7 +84,7 @@ class _HandleOnboardingState extends State<HandleOnboarding> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10.0)),
                     const Text(
-                      "Chutki Shop",
+                      "HackOn Shop",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 24.0,

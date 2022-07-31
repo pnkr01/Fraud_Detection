@@ -3,8 +3,8 @@ import 'package:quick_order/src/global/global.dart';
 
 import 'components/body.dart';
 
-class OtpSuccessScreen extends StatelessWidget {
-  const OtpSuccessScreen({Key? key}) : super(key: key);
+class OrderSucess extends StatelessWidget {
+  const OrderSucess({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

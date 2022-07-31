@@ -18,9 +18,18 @@ class CheckoutCard extends StatelessWidget {
       //send post request.
       //get request
       if (true) {
+        DateTime purchaseTime = DateTime.now();
+        await FirebaseFirestore.instance
+            .collection('phone')
+            .doc(sharedPreferences!.getString('phone'))
+            .update({
+          'purchase-time': purchaseTime.toIso8601String().substring(11, 19),
+        });
+        sharedPreferences!.setString(
+            'purchase-time', purchaseTime.toIso8601String().substring(11, 19));
         // ignore: dead_code
         Navigator.pushNamed(context, '/orderPlaced');
-      // ignore: dead_code
+        // ignore: dead_code
       } else {
         showSnackBar(context,
             'Your account is flagged, We find some suspicious transcation, reach us out at abc@gmail.com');
