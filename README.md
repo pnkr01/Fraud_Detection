@@ -14,9 +14,9 @@
 <img alt="GitHub Repo forks" src="https://img.shields.io/github/forks/pnkr01/ghumo?style=flat-square">
 <img alt="GitHub Repo issues" src="https://img.shields.io/github/issues/pnkr01/ghumo?style=flat-square">
 <br />
-<a href="https://github.com/pnkr01/ghumo/issues">Report Bug</a>
+<a href="https://github.com/pnkr01/Fraud_Detection/issues">Report Bug</a>
 ·
-<a href="https://github.com/pnkr01/ghumo/issues">Request Feature</a>
+<a href="https://github.com/pnkr01/Fraud_Detection/issues">Request Feature</a>
 </div>
 
 <!-- TABLE OF CONTENTS -->
