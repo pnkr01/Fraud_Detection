@@ -239,7 +239,11 @@ function OrderPageContent({ orderId }: { orderId: number }) {
                     {data.product.name}
                   </h3>
                   <p className="mt-2 text-sm font-medium text-gray-900">
-                    Rs {data.product.price}
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                      minimumFractionDigits: 0,
+                    }).format(Number(data.  product.price))}
                   </p>
                   <p
                     className="mt-3 text-sm text-gray-500"

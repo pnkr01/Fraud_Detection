@@ -88,7 +88,11 @@ const Home: NextPageWithAuthAndLayout = () => {
   const router = useRouter();
 
   if (isLoading && !relatedProducts)
-    return <div className="my-36 p-4 max-w-sm text-center w-full mx-auto">Loading...</div>;
+    return (
+      <div className="my-36 p-4 max-w-sm text-center w-full mx-auto">
+        Loading...
+      </div>
+    );
 
   if (!isLoading && isError) return <div>Something went wrong!</div>;
 
@@ -365,17 +369,35 @@ const Home: NextPageWithAuthAndLayout = () => {
                         className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
                       />
                       <p className="relative text-lg font-semibold text-white">
-                        Rs. {product.price}
+                        {new Intl.NumberFormat("en-IN", {
+                          style: "currency",
+                          currency: "INR",
+                          minimumFractionDigits: 0,
+                        }).format(Number(product.price))}
                       </p>
                     </div>
                   </div>
                   <div className="mt-6">
-                    <a
-                      href={product.id}
-                      className="relative flex bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
+                    <Button
+                      variant="secondary"
+                      className="w-full"
+                      onClick={() => {
+                        if (relatedProducts !== undefined) {
+                          const productId = product.id;
+                          placeOrderMutation.mutate(
+                            {
+                              productId: productId,
+                            },
+                            {
+                              onSuccess: (data) =>
+                                router.push(`/orders/${data.id}`),
+                            }
+                          );
+                        }
+                      }}
                     >
-                      Buy Now<span className="sr-only">, {product.name}</span>
-                    </a>
+                      Buy now
+                    </Button>
                   </div>
                 </div>
               ))}
