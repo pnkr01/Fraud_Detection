@@ -87,7 +87,8 @@ const Home: NextPageWithAuthAndLayout = () => {
 
   const router = useRouter();
 
-  if (isLoading && !relatedProducts) return <div>Loading...</div>;
+  if (isLoading && !relatedProducts)
+    return <div className="my-36 p-4 max-w-sm text-center w-full mx-auto">Loading...</div>;
 
   if (!isLoading && isError) return <div>Something went wrong!</div>;
 
