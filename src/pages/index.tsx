@@ -1,5 +1,11 @@
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
-import { HeartIcon, MinusSmIcon, PlusSmIcon } from "@heroicons/react/outline";
+import {
+  HeartIcon,
+  MinusSmIcon,
+  PlusSmIcon,
+  PlusIcon,
+  MinusIcon,
+} from "@heroicons/react/outline";
 import { StarIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -12,7 +18,7 @@ import { NextPageWithAuthAndLayout } from "~/utils/types";
 
 const product = {
   name: "Apple iPhone 13",
-  price: "Rs. 68,900",
+  price: 499,
   rating: 4,
   images: [
     {
@@ -72,6 +78,7 @@ const product = {
 };
 
 const Home: NextPageWithAuthAndLayout = () => {
+  const [count, setCount] = useState(1);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const {
     data: relatedProducts,
@@ -157,7 +164,13 @@ const Home: NextPageWithAuthAndLayout = () => {
 
               <div className="mt-3">
                 <h2 className="sr-only">Product information</h2>
-                <p className="text-3xl text-gray-900">{product.price}</p>
+                <p className="text-3xl text-gray-900">
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    minimumFractionDigits: 0,
+                  }).format(product.price * count)}
+                </p>
               </div>
 
               {/* Reviews */}
@@ -235,6 +248,20 @@ const Home: NextPageWithAuthAndLayout = () => {
                 </div>
 
                 <div className="mt-10 flex sm:flex-col1">
+                  <button
+                    disabled={count == 1}
+                    type="button"
+                    className="mr-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
+                    onClick={() => {
+                      if (count > 1) setCount(count - 1);
+                    }}
+                  >
+                    <MinusIcon
+                      className="h-6 w-6 flex-shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span className="sr-only">Add items</span>
+                  </button>
                   <Button
                     className="max-w-xs sm:w-full"
                     onClick={() => {
@@ -243,6 +270,7 @@ const Home: NextPageWithAuthAndLayout = () => {
                         placeOrderMutation.mutate(
                           {
                             productId: productId,
+                            count: count,
                           },
                           {
                             onSuccess: (data) =>
@@ -251,19 +279,23 @@ const Home: NextPageWithAuthAndLayout = () => {
                         );
                       }
                     }}
+                    isLoading={placeOrderMutation.isLoading}
                   >
-                    Buy now
+                    Buy now ({count})
                   </Button>
 
                   <button
                     type="button"
                     className="ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
+                    onClick={() => {
+                      setCount(count + 1);
+                    }}
                   >
-                    <HeartIcon
+                    <PlusIcon
                       className="h-6 w-6 flex-shrink-0"
                       aria-hidden="true"
                     />
-                    <span className="sr-only">Add to favorites</span>
+                    <span className="sr-only">Add items</span>
                   </button>
                 </div>
               </form>
@@ -369,9 +401,9 @@ const Home: NextPageWithAuthAndLayout = () => {
                         className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
                       />
                       <p className="relative text-lg font-semibold text-white">
-                        {new Intl.NumberFormat("en-IN", {
+                        {new Intl.NumberFormat("en-US", {
                           style: "currency",
-                          currency: "INR",
+                          currency: "USD",
                           minimumFractionDigits: 0,
                         }).format(Number(product.price))}
                       </p>
@@ -387,6 +419,7 @@ const Home: NextPageWithAuthAndLayout = () => {
                           placeOrderMutation.mutate(
                             {
                               productId: productId,
+                              count: 1,
                             },
                             {
                               onSuccess: (data) =>

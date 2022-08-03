@@ -56,6 +56,7 @@ export const authRouter = createRouter()
   .mutation("placeOrder", {
     input: z.object({
       productId: z.string(),
+      count: z.number(),
     }),
     async resolve({ ctx, input }) {
       return ctx.prisma.order.create({
@@ -63,6 +64,7 @@ export const authRouter = createRouter()
           userId: ctx.session.user.id,
           productId: input.productId,
           status: "placed",
+          count: input.count,
         },
       });
     },

@@ -112,6 +112,10 @@ const CheckFraudComponent = ({
     );
   }
 
+  if (error) {
+    return <div className="text-red-700">{error}</div>;
+  }
+
   if (data.score >= 0 && data.score <= 3) {
     return (
       <div>
@@ -239,11 +243,17 @@ function OrderPageContent({ orderId }: { orderId: number }) {
                     {data.product.name}
                   </h3>
                   <p className="mt-2 text-sm font-medium text-gray-900">
-                    {new Intl.NumberFormat("en-IN", {
+                    {new Intl.NumberFormat("en-US", {
                       style: "currency",
-                      currency: "INR",
+                      currency: "USD",
                       minimumFractionDigits: 0,
-                    }).format(Number(data.  product.price))}
+                    }).format(Number(data.product.price))}{" "}
+                    x {data.count} ={" "}
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                      minimumFractionDigits: 0,
+                    }).format(Number(data.product.price * data.count))}
                   </p>
                   <p
                     className="mt-3 text-sm text-gray-500"
@@ -261,7 +271,7 @@ function OrderPageContent({ orderId }: { orderId: number }) {
               <CheckFraudComponent
                 age={data.user.age}
                 sex={data.user.gender === "male" ? "M" : "F"}
-                purchase_value={data.product.price}
+                purchase_value={data.product.price * data.count}
                 signup_time={data.user.createdAt.toISOString()}
                 purchase_time={data.createdAt.toISOString()}
               />
