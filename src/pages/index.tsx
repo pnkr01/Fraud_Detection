@@ -18,7 +18,7 @@ import { NextPageWithAuthAndLayout } from "~/utils/types";
 
 const product = {
   name: "Apple iPhone 13",
-  price: 499,
+  price: 299,
   rating: 4,
   images: [
     {
