@@ -189,10 +189,6 @@ QUICCK_ORDER/lib/
 ![3 1](https://user-images.githubusercontent.com/83778936/182018264-6e794c0e-f97d-42a8-bbf9-65f20783890e.jpg)
 ![4 1](https://user-images.githubusercontent.com/83778936/182018266-bffac51e-8604-43b9-9332-d93e4ef97862.jpg)
 ![5 1](https://user-images.githubusercontent.com/83778936/182018271-4a096b88-89be-4275-b4d0-6fe2dc88dfd4.jpg)
-![6 2](https://user-images.githubusercontent.com/83778936/182018275-c276b90b-3b91-475a-a4d4-d42a4bc2a57e.jpg)
-![7 1](https://user-images.githubusercontent.com/83778936/182018306-aa410027-7325-409f-9ebd-ef5a55a12606.jpg)
-![8 1](https://user-images.githubusercontent.com/83778936/182018281-bc3f07cc-29dd-4c5d-b604-11592a984d69.jpg)
-![9 1](https://user-images.githubusercontent.com/83778936/182018286-eeb0c47b-51ff-4c1e-9cce-ae911a540a39.jpg)
 ![10 1](https://user-images.githubusercontent.com/83778936/182018287-53c21b4f-9c75-48ae-af67-9b6097239192.jpg)
 ![11 1](https://user-images.githubusercontent.com/83778936/182018288-74b39e69-56c5-4fbe-a77f-dd180f2c4437.jpg)
 
